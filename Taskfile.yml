@@ -1,0 +1,28 @@
+version: '3'
+
+tasks:
+  default:
+    cmds:
+      - task --list
+
+  res:
+    desc: Make resource .syso
+    cmds:
+      - go-winres make
+
+  build:
+    desc: Build GUI version
+    deps: [res]
+    cmds:
+      - go build -ldflags="-H windowsgui"
+
+  run:
+    desc: Development
+    cmds:
+      - go run .
+
+  clean:
+    desc: remove *.exe and *.syso
+    cmds:
+      - rm -f *.exe
+      - rm -f *.syso
